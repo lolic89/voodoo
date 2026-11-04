@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="sr-Latn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Na serveru se 404 prikazuje na bilo kojoj adresi (npr. /a/b/c), pa se linkovi računaju od korena sajta.
+       Na github.io adresi sajt je u podfolderu (/voodoo/), pa je to koren.
+       Lokalno (otvoreno kao fajl) sve se preskače, da bi stilovi radili i na računaru. -->
+  <script>
+    if (location.protocol !== 'file:') {
+      var root = '/';
+      if (/\.github\.io$/.test(location.hostname)) root = '/' + location.pathname.split('/')[1] + '/';
+      var b = document.createElement('base'); b.href = root; document.head.appendChild(b);
+    }
+  </script>
+  <title>Strana ne postoji — Vudu Popaj</title>
+  <meta name="description" content="Ova strana ne postoji.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#141210">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- HEADER:START -->
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="index.html" class="logo" aria-label="Vudu Popaj — početna">
+      <span class="logo-main">VUDU POPAJ</span>
+      <span class="logo-sub">voodoo popeye</span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav">
+      <span class="sr-only">Meni</span><span></span><span></span><span></span>
+    </button>
+    <nav id="main-nav" class="main-nav">
+      <a href="muzika.html">Muzika</a>
+      <a href="biografija.html">Biografija</a>
+      <a href="knjige.html">Knjige</a>
+      <a href="strip.html">Strip</a>
+      <a href="film.html">Film</a>
+      <a href="vesti.html">Vesti</a>
+      <a href="prodavnica.html">Shop</a>
+      <a href="nastupi.html" class="nav-cta">Zakaži nastup</a>
+    </nav>
+  </div>
+</header>
+<!-- HEADER:END -->
+
+<main>
+  <section class="page-hero notfound">
+    <div class="wrap notfound-grid">
+      <div>
+        <p class="kicker">Greška 404</p>
+        <h1 class="page-title notfound-title">Strana je<br>u karantinu</h1>
+        <p class="page-lead">
+          Ova adresa ne postoji — ili je pomerena, ili je link pogrešan.
+          Kao Oskar popularnosti: tu je negde, samo nije stigao na kućnu adresu.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-red" href="index.html">Na početnu</a>
+          <a class="btn btn-ghost" href="muzika.html">Slušaj muziku</a>
+        </div>
+      </div>
+      <div class="notfound-code" aria-hidden="true">404</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="next-links">
+        <a href="biografija.html"><span>01</span>Biografija<small>Od 1992. do danas</small></a>
+        <a href="knjige.html"><span>02</span>Knjige<small>Romani, priče, poezija</small></a>
+        <a href="prodavnica.html"><span>03</span>Shop<small>Diskovi, knjige, majice</small></a>
+        <a href="nastupi.html"><span>04</span>Zakaži nastup<small>Booking i kontakt</small></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER:START -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <p class="logo-main">VUDU POPAJ</p>
+      <p class="muted">Radenko Stojanović &middot; Zemun, Beograd</p>
+    </div>
+    <ul class="socials">
+      <li><a href="https://www.youtube.com/user/MrVoodooPop" target="_blank" rel="noopener">YouTube</a></li>
+      <li><a href="https://www.instagram.com/voodoopopeye/" target="_blank" rel="noopener">Instagram</a></li>
+      <li><a href="https://www.facebook.com/VuduPopaj" target="_blank" rel="noopener">Facebook</a></li>
+      <li><a href="https://twitter.com/VuduPopaj" target="_blank" rel="noopener">X / Twitter</a></li>
+    </ul>
+    <p class="muted copyright">&copy; <span id="year">2026</span> Vudu Popaj. Sva prava zadržana.</p>
+  </div>
+</footer>
+<!-- FOOTER:END -->
+
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+# Lokalna podesavanja editora / Claude
+.claude/
+
+# Arhiva teksta sa starog Wix sajta - ostaje samo na racunaru
+content/
+
+# Sistemski fajlovi
+Thumbs.db
+desktop.ini
+.DS_Store
