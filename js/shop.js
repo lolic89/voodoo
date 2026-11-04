@@ -22,8 +22,34 @@
   // Popust po ukupnom broju komada: 4 → 10%, 5+ → 15%
   const discountRate = (qty) => (qty >= 5 ? 0.15 : qty === 4 ? 0.10 : 0);
 
+  // Katalog iz HTML-a je jedini izvor cena i naziva. Sačuvana korpa (localStorage)
+  // može biti izmenjena u browseru, pa joj verujemo samo šifru, opciju i količinu.
+  const catalog = new Map();
+  document.querySelectorAll('.product').forEach((card) => {
+    catalog.set(card.dataset.code, {
+      name: card.dataset.name,
+      price: Number(card.dataset.price),
+      optionLabel: card.dataset.optionLabel || '',
+      options: card.dataset.options ? card.dataset.options.split(',').map((o) => o.trim()) : [],
+    });
+  });
+
+  function sanitize(raw) {
+    if (!Array.isArray(raw)) return [];
+    const out = [];
+    raw.forEach((i) => {
+      const p = i && catalog.get(String(i.code));
+      if (!p) return;
+      const option = p.options.length ? String(i.option || '') : '';
+      if (p.options.length && !p.options.includes(option)) return;
+      const qty = Math.min(99, Math.max(1, Math.floor(Number(i.qty)) || 1));
+      out.push({ code: String(i.code), name: p.name, price: p.price, option, optionLabel: p.optionLabel, qty });
+    });
+    return out;
+  }
+
   let cart = [];
-  try { cart = JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch (e) { cart = []; }
+  try { cart = sanitize(JSON.parse(localStorage.getItem(STORAGE_KEY))); } catch (e) { cart = []; }
   const save = () => { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(cart)); } catch (e) {} };
 
   // ---------- Kartice proizvoda: izbor opcije + dugme ----------
@@ -78,7 +104,7 @@
   // ---------- Operacije nad korpom ----------
   function add(item) {
     const found = cart.find((i) => i.code === item.code && i.option === item.option);
-    if (found) found.qty += 1;
+    if (found) found.qty = Math.min(99, found.qty + 1);
     else cart.push({ ...item, qty: 1 });
     save();
     render();
@@ -118,7 +144,7 @@
       li.querySelector('.ci-meta').textContent =
         `${item.code}${item.option ? ' · ' + item.optionLabel + ': ' + item.option : ''}`;
       li.querySelectorAll('button').forEach((b) => b.addEventListener('click', () => {
-        if (b.dataset.act === 'inc') item.qty += 1;
+        if (b.dataset.act === 'inc') item.qty = Math.min(99, item.qty + 1);
         if (b.dataset.act === 'dec') item.qty -= 1;
         if (b.dataset.act === 'rm' || item.qty < 1) cart.splice(idx, 1);
         save();
