@@ -3,14 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Na serveru se 404 prikazuje na bilo kojoj adresi (npr. /a/b/c), pa se linkovi računaju od korena sajta.
-       Na github.io adresi sajt je u podfolderu (/voodoo/), pa je to koren.
-       Lokalno (otvoreno kao fajl) sve se preskače, da bi stilovi radili i na računaru. -->
+
   <script>
     if (location.protocol !== 'file:') {
       var root = '/';
       var seg = location.pathname.split('/')[1] || '';
-      // samo obično ime foldera (slova, brojevi, - _ .), nikad prazno — da base uvek ostane na ovom sajtu
       if (/\.github\.io$/.test(location.hostname) && /^[A-Za-z0-9_-][A-Za-z0-9._-]*$/.test(seg)) root = '/' + seg + '/';
       var b = document.createElement('base'); b.href = root; document.head.appendChild(b);
     }
@@ -28,7 +25,6 @@
 </head>
 <body>
 
-<!-- HEADER:START -->
 <header class="site-header">
   <div class="wrap header-inner">
     <a href="index.html" class="logo" aria-label="Vudu Popaj — početna">
@@ -50,7 +46,6 @@
     </nav>
   </div>
 </header>
-<!-- HEADER:END -->
 
 <main>
   <section class="page-hero notfound">
@@ -83,7 +78,6 @@
   </section>
 </main>
 
-<!-- FOOTER:START -->
 <footer class="site-footer">
   <div class="wrap footer-inner">
     <div>
@@ -99,7 +93,6 @@
     <p class="muted copyright">&copy; <span id="year">2026</span> Vudu Popaj. Sva prava zadržana.</p>
   </div>
 </footer>
-<!-- FOOTER:END -->
 
 <script src="js/main.js"></script>
 </body>

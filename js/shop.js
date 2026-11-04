@@ -1,9 +1,3 @@
-// =========================================================
-// Korpa za prodavnicu: bez servera — porudžbina ide mejlom.
-// Proizvodi se čitaju iz HTML-a (data-code, data-name, data-price,
-// data-options, data-option-label), pa se novi proizvod dodaje
-// samo kopiranjem jednog <article class="product"> bloka.
-// =========================================================
 (function () {
   const EMAIL = 'popajvudu@gmail.com';
   const STORAGE_KEY = 'vudu-korpa';
@@ -19,11 +13,8 @@
 
   const rsd = (n) => n.toLocaleString('sr-RS') + ' rsd';
 
-  // Popust po ukupnom broju komada: 4 → 10%, 5+ → 15%
   const discountRate = (qty) => (qty >= 5 ? 0.15 : qty === 4 ? 0.10 : 0);
 
-  // Katalog iz HTML-a je jedini izvor cena i naziva. Sačuvana korpa (localStorage)
-  // može biti izmenjena u browseru, pa joj verujemo samo šifru, opciju i količinu.
   const catalog = new Map();
   document.querySelectorAll('.product').forEach((card) => {
     catalog.set(card.dataset.code, {
@@ -52,7 +43,6 @@
   try { cart = sanitize(JSON.parse(localStorage.getItem(STORAGE_KEY))); } catch (e) { cart = []; }
   const save = () => { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(cart)); } catch (e) {} };
 
-  // ---------- Kartice proizvoda: izbor opcije + dugme ----------
   document.querySelectorAll('.product').forEach((card) => {
     const body = card.querySelector('.product-body');
     const actions = document.createElement('div');
@@ -101,7 +91,6 @@
     body.appendChild(actions);
   });
 
-  // ---------- Operacije nad korpom ----------
   function add(item) {
     const found = cart.find((i) => i.code === item.code && i.option === item.option);
     if (found) found.qty = Math.min(99, found.qty + 1);
@@ -109,7 +98,7 @@
     save();
     render();
     fab.classList.remove('bump');
-    void fab.offsetWidth; // restart animacije
+    void fab.offsetWidth;
     fab.classList.add('bump');
   }
 
@@ -167,7 +156,6 @@
     hint.hidden = !hint.textContent;
   }
 
-  // ---------- Otvaranje / zatvaranje ----------
   function openCart() {
     panel.hidden = false;
     backdrop.hidden = false;
@@ -188,7 +176,6 @@
   backdrop.addEventListener('click', closeCart);
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !panel.hidden) closeCart(); });
 
-  // ---------- Slanje porudžbine mejlom ----------
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(form).entries());

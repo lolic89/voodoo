@@ -1,4 +1,3 @@
-// Mobilni meni
 const toggle = document.querySelector('.nav-toggle');
 const nav = document.getElementById('main-nav');
 if (toggle && nav) {
@@ -8,7 +7,6 @@ if (toggle && nav) {
   });
 }
 
-// Video (YouTube ili Facebook): učitaj iframe tek na klik (brže učitavanje strane)
 document.querySelectorAll('.yt').forEach((el) => {
   el.addEventListener('click', () => {
     const iframe = document.createElement('iframe');
@@ -25,7 +23,6 @@ document.querySelectorAll('.yt').forEach((el) => {
   }, { once: true });
 });
 
-// Biografija: prekidač SR / EN
 const langButtons = document.querySelectorAll('.lang-switch button');
 if (langButtons.length) {
   const titles = { sr: 'Hronologija', en: 'Timeline' };
@@ -42,7 +39,6 @@ if (langButtons.length) {
   });
 }
 
-// Formular koji sastavlja mejl (zakazivanje / kontakt) — bez servera
 document.querySelectorAll('form[data-mailto]').forEach((form) => {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -68,6 +64,5 @@ document.querySelectorAll('form[data-mailto]').forEach((form) => {
   });
 });
 
-// Godina u footeru
 const y = document.getElementById('year');
 if (y) y.textContent = new Date().getFullYear();
